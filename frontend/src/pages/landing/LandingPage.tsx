@@ -6,6 +6,7 @@ import {
   BookOpen, Bell, DollarSign, Briefcase 
 } from 'lucide-react';
 import Navbar from '../../components/landing/Navbar';
+import { useAuth } from '../../contexts/AuthContext'; // Import the useAuth hook
 
 const features = [
   {
@@ -51,6 +52,8 @@ const features = [
 ];
 
 const LandingPage = () => {
+  const { isAuthenticated } = useAuth(); // Get the authentication status
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -87,18 +90,29 @@ const LandingPage = () => {
             animate={{ y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Link 
-              to="/signup"
-              className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
-            >
-              Get Started Free
-            </Link>
-            <Link 
-              to="/demo"
-              className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-50 transition-colors border border-indigo-600"
-            >
-              Request Demo
-            </Link>
+            {!isAuthenticated ? ( // Show links conditionally based on authentication
+              <>
+                <Link 
+                  to="/signup"
+                  className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
+                >
+                  Get Started Free
+                </Link>
+                <Link 
+                  to="/login"
+                  className="bg-white text-indigo-600 px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-50 transition-colors border border-indigo-600"
+                >
+                  Login
+                </Link>
+              </>
+            ) : (
+              <Link 
+                to="/dashboard"
+                className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
+              >
+                Go to Dashboard
+              </Link>
+            )}
           </motion.div>
         </div>
       </motion.section>
