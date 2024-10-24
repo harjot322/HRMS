@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./", // Root directory for input files
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true
+  },
+  "include": [
+    "*.ts",         // Include all .ts files in the root of backend
+    "*.tsx",        // Include all .tsx files in the root of backend
+    "**/*.ts",      // Include all .ts files in subdirectories
+    "**/*.tsx",    // Include all .tsx files in subdirectories
+    "*.js",        // Include all .tsx files in the root of backend
+    "**/*.jsx",      // Include all .ts files in subdirectories
+    ],
+  "exclude": [
+    "node_modules"
+  ]
+}

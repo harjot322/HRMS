@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import BackButton from '../../components/BackButton';
+import BackButton from '../components/BackButton';
 import axios from 'axios';
 
 interface LocationState {

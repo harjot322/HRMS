@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useAuth } from '../../context/AuthContext';
-import DashboardStats from '../../components/dashboard/DashboardStats';
-import AttendanceWidget from '../../components/dashboard/AttendanceWidget';
-import LeaveWidget from '../../components/dashboard/LeaveWidget';
-import TasksWidget from '../../components/dashboard/TaskWidget';
-import AnnouncementsWidget from '../../components/dashboard/AnnouncementsWidget';
-import PayrollWidget from '../../components/dashboard/PayrollWidget';
+import { useAuth } from '../context/AuthContext';
+import DashboardStats from '../components/dashboard/DashboardStats';
+import AttendanceWidget from '../components/dashboard/AttendanceWidget';
+import LeaveWidget from '../components/dashboard/LeaveWidget';
+import TasksWidget from '../components/dashboard/TaskWidget';
+import AnnouncementsWidget from '../components/dashboard/AnnouncementsWidget';
+import PayrollWidget from '../components/dashboard/PayrollWidget';
 
 const Dashboard = () => {
   const { user } = useAuth();

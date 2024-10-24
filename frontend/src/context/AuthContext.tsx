@@ -8,7 +8,6 @@ interface User {
   role: string;
 }
 
-// Define a UserData interface for registration
 interface UserData {
   name: string;
   email: string;
@@ -18,9 +17,9 @@ interface UserData {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  isAuthenticated: boolean; // Add this line
+  isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (userData: UserData) => Promise<void>; // Specify UserData type
+  register: (userData: UserData) => Promise<void>;
   logout: () => void;
 }
 
@@ -47,7 +46,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(data);
       setIsAuthenticated(true);
     } catch {
-      // No need to capture the error if you're not using it
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
       setIsAuthenticated(false);
@@ -55,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false);
     }
   };
-  
+
   const login = async (email: string, password: string) => {
     try {
       const { data } = await axios.post('/api/users/login', { email, password });
@@ -64,10 +62,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(data);
       setIsAuthenticated(true);
     } catch {
-      // Handle login error if needed, or remove the catch block entirely
+      throw new Error('Login failed');
     }
   };
-  
+
   const register = async (userData: UserData) => {
     try {
       const { data } = await axios.post('/api/users/register', userData);
@@ -76,10 +74,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(data);
       setIsAuthenticated(true);
     } catch {
-      // Handle registration error if needed, or remove the catch block entirely
+      throw new Error('Registration failed');
     }
   };
-  
 
   const logout = () => {
     localStorage.removeItem('token');

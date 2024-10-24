@@ -7,11 +7,12 @@ import {
   BarChart2, BookOpen, HeartHandshake, 
   MessageSquare 
 } from 'lucide-react';
+import Navbar from '../components/Navbar'; // Import the Navbar component
 
 interface FeatureCardProps {
-  icon: React.ElementType; // Type for the icon component
-  title: string;           // Type for the title
-  description: string;     // Type for the description
+  icon: React.ElementType;
+  title: string;
+  description: string;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => {
@@ -83,6 +84,7 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen">
+      <Navbar /> {/* Ensure Navbar is rendered here */}
       {/* Hero Section */}
       <motion.section 
         initial={{ opacity: 0 }}

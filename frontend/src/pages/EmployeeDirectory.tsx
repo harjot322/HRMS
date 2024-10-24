@@ -1,9 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DataTable } from '../../components/ui/DataTable';
+import { DataTable } from '../components/ui/DataTable';
 import { Search, UserPlus } from 'lucide-react';
 
-const employees = [
+interface Employee {
+  id: number;
+  name: string;
+  department: string;
+  role: string;
+  email: string;
+  status: 'Active' | 'Inactive';
+}
+
+const employees: Employee[] = [
   {
     id: 1,
     name: 'John Doe',
@@ -20,7 +29,6 @@ const employees = [
     email: 'jane.smith@company.com',
     status: 'Active',
   },
-  // Add more sample data as needed
 ];
 
 const columns = [
@@ -43,7 +51,7 @@ const columns = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }: any) => (
+    cell: ({ row }: { row: { original: Employee } }) => (
       <span
         className={`px-2 py-1 rounded-full text-xs font-medium ${
           row.original.status === 'Active'

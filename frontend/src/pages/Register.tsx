@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { AlertCircle } from 'lucide-react';
-import BackButton from '../../components/BackButton';
-import axios from 'axios'; // Import Axios
+import BackButton from '../components/BackButton';
+import axios from 'axios';
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -36,16 +36,16 @@ const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await register(formData);
-      navigate('/login', { state: { message: 'Registration successful! Please login.' } });
-    } catch (err: unknown) { // Use 'unknown' instead of 'any'
-      if (axios.isAxiosError(err)) { // Check if the error is an AxiosError
-        setError(err.response?.data?.message || 'An error occurred during registration');
+      await register(formData); // Attempt to register user with the form data
+      navigate('/login', { state: { message: 'Registration successful! Please login.' } }); // Redirect to login on success
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message || 'An error occurred during registration'); // Display specific error message if available
       } else {
-        setError('An unexpected error occurred');
+        setError('An unexpected error occurred'); // Fallback error message
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Reset loading state
     }
   };
 
