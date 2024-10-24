@@ -1,57 +1,33 @@
-version: '3.8'
+version: '3.8'  # You can specify the version as needed
 
 services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # Specify the Dockerfile name if it's different
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Map the port used by the frontend app
     environment:
-      - VITE_API_URL=http://localhost:5000
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}  # Pass the MongoDB URI if needed
+    volumes:
+      - ./frontend/src:/app/src  # Optional: Hot reload during development
+      - ./frontend/public:/app/public  # Optional: Hot reload during development
     depends_on:
-      - backend
+      - backend  # Ensure backend service is started first
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # Specify the Dockerfile name if it's different
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Map the port used by the backend API
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/hrms
-      - JWT_SECRET=your_jwt_secret_key_here
-      - NODE_ENV=development
-    depends_on:
-      - mongodb
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}  # Pass the MongoDB URI if needed
     volumes:
-      - mongodb_data:/data/db
+      - ./backend:/app  # Optional: Mount backend code for development
 
-  prometheus:
-    image: prom/prometheus:latest
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3001:3000"
-    volumes:
-      - grafana_data:/var/lib/grafana
-    depends_on:
-      - prometheus
-
-volumes:
-  mongodb_data:
-  prometheus_data:
-  grafana_data:
+networks:
+  default:
+    driver: bridge  # You can customize the network if needed

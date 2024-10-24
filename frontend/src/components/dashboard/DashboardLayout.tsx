@@ -6,7 +6,7 @@ import {
   DollarSign, Award, Briefcase, Bell,
   BookOpen, HelpCircle, Menu, X
 } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 const menuItems = [
   { icon: Users, label: 'Employee Directory', path: '/directory' },
@@ -16,6 +16,7 @@ const menuItems = [
   { icon: Award, label: 'Performance', path: '/performance' },
   { icon: Briefcase, label: 'Tasks', path: '/tasks' },
   { icon: Bell, label: 'Announcements', path: '/announcements' },
+  { icon: Calendar, label: 'Events', path: '/events' }, // Added Calendar icon
   { icon: BookOpen, label: 'Learning', path: '/learning' },
   { icon: HelpCircle, label: 'Support', path: '/support' },
 ];

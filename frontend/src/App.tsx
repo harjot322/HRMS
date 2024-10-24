@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AppRoutes from './routes';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider } from '././context/AuthContext';
 import { Toaster } from './components/ui/Toaster';
 
 const queryClient = new QueryClient();

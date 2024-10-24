@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client'; // Note the import change
-import App from './App';
-import './index.css'; // Include your CSS file
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import { AuthProvider } from '././context/AuthContext';
 
-// Create a root for the app
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
-// Render the app
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </StrictMode>
 );

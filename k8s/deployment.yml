@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrms-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hrms
+  template:
+    metadata:
+      labels:
+        app: hrms
+    spec:
+      containers:
+      - name: hrms
+        image: hrms:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: hrms-secrets
+              key: mongodb-uri
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: hrms-secrets
+              key: jwt-secret
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
