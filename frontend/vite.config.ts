@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const config = defineConfig({
+export default defineConfig({
+  root: '.', // Root is the main directory now
   plugins: [react()],
   server: {
-    host: true, // Enable this if you're accessing from other devices
-    port: 5173,
-    strictPort: true, // Exit if the port is already in use
+    host: true,
+    port: 5179, // or the port of your choice
+    strictPort: true,
   },
   build: {
     outDir: 'dist', // Specify the output directory for builds
@@ -14,12 +15,7 @@ const config = defineConfig({
   },
   resolve: {
     alias: {
-      // Add any aliases if needed, e.g. '@': path.resolve(__dirname, 'src')
+      '@': '/frontend/src', // Set alias to frontend/src for easier imports
     },
   },
 });
-
-// Debugging output
-console.log('Vite Config:', config);
-
-export default config;
